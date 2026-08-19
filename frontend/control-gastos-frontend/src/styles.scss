@@ -7,7 +7,31 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0a0a1a;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0F2A4A;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 42, 74, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 188, 156, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 188, 156, 0.4);
+}
+
+::selection {
+  background: rgba(26, 188, 156, 0.25);
+  color: #EBF3F9;
 }

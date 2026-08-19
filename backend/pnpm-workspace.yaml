@@ -1,2 +1,5 @@
 allowBuilds:
   bcrypt: false
+
+auditConfig:
+  minimumReleaseAge: 0

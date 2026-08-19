@@ -1,10 +1,10 @@
-const { DataSource } = require('typeorm');
-const { User } = require('../entities/User');
-const dotenv = require('dotenv');
+import { DataSource } from 'typeorm';
+import { User } from '../entities/User';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || '5432'),
@@ -17,5 +17,3 @@ const AppDataSource = new DataSource({
   subscribers: [],
   migrations: [],
 });
-
-module.exports = { AppDataSource };

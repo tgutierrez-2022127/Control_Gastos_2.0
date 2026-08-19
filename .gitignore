@@ -4,31 +4,19 @@ npm-debug.log
 yarn-error.log
 pnpm-debug.log
 
-# Backend
-backend/dist/
-backend/node_modules/
-backend/.env
+# Angular
+dist/
+.angular/
+tmp/
 
-# Frontend
-frontend/*/node_modules/
-frontend/*/dist/
-frontend/*/.angular/
-frontend/*/src/assets/
-frontend/*/.env
+# Environment
+.env
+.env.local
 
 # IDE
 .vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Logs
-logs/
-*.log

@@ -1,18 +1,21 @@
-const { AppDataSource } = require('../config/database');
-const { User, UserRole } = require('../entities/User');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
+import { AppDataSource } from '../config/database';
+import { User } from '../entities/User';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { Repository } from 'typeorm';
 
 dotenv.config();
 
-class AuthService {
+export class AuthService {
+  private userRepository: Repository<User>;
+
   constructor() {
     this.userRepository = AppDataSource.getRepository(User);
   }
 
-  async login(email, plainPassword) {
+  async login(email: string, plainPassword: string) {
     const user = await this.userRepository.findOne({ where: { email } });
-    
+
     if (!user) {
       throw new Error('Credenciales incorrectas');
     }
@@ -30,22 +33,20 @@ class AuthService {
     await this.userRepository.save(user);
 
     const token = jwt.sign(
-      { 
-        id: user.id, 
-        email: user.email, 
-        role: user.role 
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role
       },
       process.env.JWT_SECRET || 'default-secret',
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      { expiresIn: 60 }
     );
 
-    const { password, ...userWithoutPassword } = user;
-    
+    const { password, ...userWithoutPassword } = user as User & { password: string };
+
     return {
       user: userWithoutPassword,
       token
     };
   }
 }
-
-module.exports = { AuthService };

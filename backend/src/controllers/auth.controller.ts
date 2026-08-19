@@ -1,9 +1,10 @@
-const { AuthService } = require('../services/auth.service');
+import { Request, Response } from 'express';
+import { AuthService } from '../services/auth.service';
 
 const authService = new AuthService();
 
-const AuthController = {
-  async login(req, res) {
+export const AuthController = {
+  async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
 
@@ -21,13 +22,12 @@ const AuthController = {
         message: 'Inicio de sesion exitoso',
         data: result
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Error al iniciar sesion';
       res.status(401).json({
         success: false,
-        message: error.message || 'Error al iniciar sesion'
+        message
       });
     }
   }
 };
-
-module.exports = { AuthController };
