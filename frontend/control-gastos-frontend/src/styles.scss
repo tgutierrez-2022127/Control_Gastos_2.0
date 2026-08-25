@@ -7,8 +7,9 @@
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: #0F2A4A;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0B132B;
+  color: #ECF0F1;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,19 +20,19 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 42, 74, 0.3);
+  background: rgba(11, 25, 44, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(26, 188, 156, 0.25);
+  background: rgba(52, 152, 219, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(26, 188, 156, 0.4);
+  background: rgba(52, 152, 219, 0.4);
 }
 
 ::selection {
-  background: rgba(26, 188, 156, 0.25);
-  color: #EBF3F9;
+  background: rgba(22, 160, 133, 0.25);
+  color: #ECF0F1;
 }
