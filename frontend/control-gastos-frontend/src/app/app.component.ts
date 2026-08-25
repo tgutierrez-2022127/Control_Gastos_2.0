@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   template: `
     <!-- ========== LOGIN ========== -->
     <div *ngIf="!logueado" class="login-page">
@@ -31,11 +32,7 @@ import { FormsModule } from '@angular/forms';
 
         <div class="logo-area">
           <div class="logo-glow-bg"></div>
-          <div class="shield-logo">
-            <div class="shield-inner">
-              <i class="fas fa-chart-line"></i>
-            </div>
-          </div>
+          <img src="assets/logo.png" alt="FinVanguard" class="shield-logo logo-img">
           <div class="orbit-ring ring-1"></div>
           <div class="orbit-ring ring-2"></div>
         </div>
@@ -132,69 +129,17 @@ import { FormsModule } from '@angular/forms';
       </div>
     </div>
 
-    <!-- ========== DASHBOARD ========== -->
-    <div *ngIf="logueado" class="login-page">
-      <div class="bg-grid"></div>
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-
-      <div class="login-card dashboard-card">
-        <div class="logo-area">
-          <div class="logo-glow-bg success-glow"></div>
-          <div class="shield-logo success-logo">
-            <div class="shield-inner">
-              <i class="fas fa-check"></i>
-            </div>
-          </div>
-        </div>
-
-        <h1 class="brand-name">Bienvenido</h1>
-        <p class="brand-tagline">{{ usuario?.fullName }}</p>
-
-        <div class="user-card">
-          <div class="user-row">
-            <div class="user-row-icon"><i class="fas fa-user"></i></div>
-            <div class="user-row-data">
-              <span class="user-row-label">Nombre</span>
-              <span class="user-row-value">{{ usuario?.fullName }}</span>
-            </div>
-          </div>
-          <div class="user-row">
-            <div class="user-row-icon"><i class="fas fa-envelope"></i></div>
-            <div class="user-row-data">
-              <span class="user-row-label">Correo</span>
-              <span class="user-row-value">{{ usuario?.email }}</span>
-            </div>
-          </div>
-          <div class="user-row">
-            <div class="user-row-icon"><i class="fas fa-id-badge"></i></div>
-            <div class="user-row-data">
-              <span class="user-row-label">Rol</span>
-              <span class="user-row-value role-badge">{{ usuario?.role }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="session-timer" *ngIf="tokenExpiryTime">
-          <i class="fas fa-hourglass-half"></i>
-          <span>Sesion expira en: <strong>{{ tiempoRestante }}</strong></span>
-        </div>
-
-        <button (click)="cerrarSesion()" class="btn-logout">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Cerrar Sesion</span>
-        </button>
-      </div>
-    </div>
+    <!-- ========== DASHBOARD (via Router) ========== -->
+    <router-outlet *ngIf="logueado"></router-outlet>
   `,
   styles: [`
     /* ================================================================
        FinVanguard Design System
        Palette:
-         Navy:    #0F2A4A
-         Cobalt:  #1F4E79
-         Emerald: #16A085 / #1ABC9C
-         Ice:     #EBF3F9 / #FFFFFF
+         Navy:    #0B192C
+         Cobalt:  #3498DB
+         Emerald: #16A085
+         Ice:     #ECF0F1 / #FFFFFF
     ================================================================ */
 
     /* ========== KEYFRAMES ========== */
@@ -264,7 +209,7 @@ import { FormsModule } from '@angular/forms';
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(160deg, #060e18 0%, #0F2A4A 40%, #0a1c30 70%, #060e18 100%);
+      background: linear-gradient(160deg, #060e18 0%, #0B192C 40%, #0a1520 70%, #060e18 100%);
       padding: 20px;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       position: relative;
@@ -296,12 +241,12 @@ import { FormsModule } from '@angular/forms';
       animation: float-particle linear infinite;
     }
 
-    .p1 { width: 4px; height: 4px; background: rgba(26, 188, 156, 0.7); left: 8%;  --drift: 60px;  animation-duration: 14s; animation-delay: 0s; }
-    .p2 { width: 3px; height: 3px; background: rgba(31, 78, 121, 0.8);  left: 18%; --drift: -40px; animation-duration: 18s; animation-delay: 2s; }
+    .p1 { width: 4px; height: 4px; background: rgba(22, 160, 133, 0.7); left: 8%;  --drift: 60px;  animation-duration: 14s; animation-delay: 0s; }
+    .p2 { width: 3px; height: 3px; background: rgba(52, 152, 219, 0.8);  left: 18%; --drift: -40px; animation-duration: 18s; animation-delay: 2s; }
     .p3 { width: 5px; height: 5px; background: rgba(22, 160, 133, 0.6); left: 32%; --drift: 50px;  animation-duration: 12s; animation-delay: 1s; }
     .p4 { width: 3px; height: 3px; background: rgba(235, 243, 249, 0.4); left: 48%; --drift: -30px; animation-duration: 20s; animation-delay: 4s; }
-    .p5 { width: 6px; height: 6px; background: rgba(26, 188, 156, 0.5); left: 60%; --drift: 45px;  animation-duration: 16s; animation-delay: 0.5s; }
-    .p6 { width: 3px; height: 3px; background: rgba(31, 78, 121, 0.6);  left: 72%; --drift: -55px; animation-duration: 22s; animation-delay: 3s; }
+    .p5 { width: 6px; height: 6px; background: rgba(22, 160, 133, 0.5); left: 60%; --drift: 45px;  animation-duration: 16s; animation-delay: 0.5s; }
+    .p6 { width: 3px; height: 3px; background: rgba(52, 152, 219, 0.6);  left: 72%; --drift: -55px; animation-duration: 22s; animation-delay: 3s; }
     .p7 { width: 4px; height: 4px; background: rgba(22, 160, 133, 0.5); left: 85%; --drift: 35px;  animation-duration: 15s; animation-delay: 5s; }
     .p8 { width: 3px; height: 3px; background: rgba(235, 243, 249, 0.3); left: 55%; --drift: -25px; animation-duration: 19s; animation-delay: 6s; }
 
@@ -323,28 +268,28 @@ import { FormsModule } from '@angular/forms';
 
     .orb-2 {
       width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(31, 78, 121, 0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(52, 152, 219, 0.15), transparent 70%);
       bottom: -120px; left: -100px;
       animation-delay: -8s;
     }
 
     .orb-3 {
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(15, 42, 74, 0.2), transparent 70%);
+      background: radial-gradient(circle, rgba(11, 25, 44, 0.2), transparent 70%);
       top: 40%; left: 40%;
       animation-delay: -16s;
     }
 
     /* ========== CARD ========== */
     .login-card {
-      background: rgba(15, 42, 74, 0.45);
+      background: rgba(11, 25, 44, 0.45);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-radius: 28px;
       padding: 50px 42px;
       width: 100%;
       max-width: 430px;
-      border: 1px solid rgba(26, 188, 156, 0.08);
+      border: 1px solid rgba(22, 160, 133, 0.08);
       box-shadow:
         0 0 0 1px rgba(235, 243, 249, 0.03),
         0 8px 32px rgba(0, 0, 0, 0.4),
@@ -362,7 +307,7 @@ import { FormsModule } from '@angular/forms';
       left: -100%;
       width: 200%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(26, 188, 156, 0.5), rgba(31, 78, 121, 0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(22, 160, 133, 0.5), rgba(52, 152, 219, 0.5), transparent);
       animation: border-dance 4s linear infinite;
     }
 
@@ -385,19 +330,19 @@ import { FormsModule } from '@angular/forms';
       width: 80px;
       height: 80px;
       border-radius: 20px;
-      background: linear-gradient(135deg, rgba(26, 188, 156, 0.35), rgba(31, 78, 121, 0.35));
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.35), rgba(52, 152, 219, 0.35));
       filter: blur(22px);
       animation: pulse-ring 4s ease-in-out infinite;
     }
 
     .success-glow {
-      background: linear-gradient(135deg, rgba(26, 188, 156, 0.4), rgba(22, 160, 133, 0.3)) !important;
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.4), rgba(22, 160, 133, 0.3)) !important;
     }
 
     .shield-logo {
       width: 78px;
       height: 78px;
-      background: linear-gradient(135deg, #1ABC9C, #1F4E79, #0F2A4A);
+      background: linear-gradient(135deg, #16A085, #3498DB, #0B192C);
       background-size: 200% 200%;
       animation: gradient-rotate 5s ease infinite;
       border-radius: 20px;
@@ -407,8 +352,8 @@ import { FormsModule } from '@angular/forms';
       position: relative;
       z-index: 2;
       box-shadow:
-        0 0 24px rgba(26, 188, 156, 0.25),
-        0 0 48px rgba(31, 78, 121, 0.12),
+        0 0 24px rgba(22, 160, 133, 0.25),
+        0 0 48px rgba(52, 152, 219, 0.12),
         0 10px 20px rgba(0, 0, 0, 0.3);
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -417,14 +362,23 @@ import { FormsModule } from '@angular/forms';
       transform: scale(1.08) rotate(3deg);
     }
 
+    .logo-img {
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      border-radius: 20px;
+      background: transparent !important;
+      mix-blend-mode: screen;
+    }
+
     .success-logo {
-      background: linear-gradient(135deg, #1ABC9C, #16A085);
+      background: linear-gradient(135deg, #16A085, #16A085);
       background-size: 200% 200%;
     }
 
     .shield-inner {
       font-size: 30px;
-      color: #EBF3F9;
+      color: #ECF0F1;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
@@ -438,13 +392,13 @@ import { FormsModule } from '@angular/forms';
 
     .ring-1 {
       width: 94px; height: 94px;
-      border-color: rgba(26, 188, 156, 0.2);
+      border-color: rgba(22, 160, 133, 0.2);
       animation-delay: 0s;
     }
 
     .ring-2 {
       width: 112px; height: 112px;
-      border-color: rgba(31, 78, 121, 0.12);
+      border-color: rgba(52, 152, 219, 0.12);
       animation-delay: -2.5s;
     }
 
@@ -455,7 +409,7 @@ import { FormsModule } from '@angular/forms';
       text-align: center;
       margin-bottom: 4px;
       letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #EBF3F9 30%, #1ABC9C 100%);
+      background: linear-gradient(135deg, #ECF0F1 30%, #16A085 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -495,9 +449,9 @@ import { FormsModule } from '@angular/forms';
     }
 
     .alert-success {
-      background: rgba(26, 188, 156, 0.08);
-      color: #1ABC9C;
-      border-color: rgba(26, 188, 156, 0.15);
+      background: rgba(22, 160, 133, 0.08);
+      color: #16A085;
+      border-color: rgba(22, 160, 133, 0.15);
     }
 
     .session-alert {
@@ -550,7 +504,7 @@ import { FormsModule } from '@angular/forms';
 
     .form-label i {
       font-size: 11px;
-      color: rgba(26, 188, 156, 0.6);
+      color: rgba(22, 160, 133, 0.6);
     }
 
     .input-wrapper {
@@ -560,10 +514,10 @@ import { FormsModule } from '@angular/forms';
     .form-input {
       width: 100%;
       padding: 14px 16px;
-      background: rgba(15, 42, 74, 0.5);
-      border: 1.5px solid rgba(235, 243, 249, 0.06);
+      background: rgba(11, 25, 44, 0.5);
+      border: 1.5px solid rgba(236, 240, 241, 0.06);
       border-radius: 14px;
-      color: #EBF3F9;
+      color: #ECF0F1;
       font-size: 15px;
       font-family: inherit;
       outline: none;
@@ -576,9 +530,9 @@ import { FormsModule } from '@angular/forms';
     }
 
     .form-input:focus {
-      border-color: rgba(26, 188, 156, 0.45);
-      background: rgba(15, 42, 74, 0.7);
-      box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.06), 0 0 24px rgba(26, 188, 156, 0.04);
+      border-color: rgba(22, 160, 133, 0.45);
+      background: rgba(11, 25, 44, 0.7);
+      box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.06), 0 0 24px rgba(22, 160, 133, 0.04);
     }
 
     .input-focus-line {
@@ -587,7 +541,7 @@ import { FormsModule } from '@angular/forms';
       left: 50%;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #1ABC9C, #1F4E79);
+      background: linear-gradient(90deg, #16A085, #3498DB);
       border-radius: 0 0 14px 14px;
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       transform: translateX(-50%);
@@ -612,7 +566,7 @@ import { FormsModule } from '@angular/forms';
     }
 
     .toggle-pw:hover {
-      color: rgba(26, 188, 156, 0.8);
+      color: rgba(22, 160, 133, 0.8);
     }
 
     /* ========== BUTTONS ========== */
@@ -621,7 +575,7 @@ import { FormsModule } from '@angular/forms';
       padding: 15px;
       border: none;
       border-radius: 14px;
-      background: linear-gradient(135deg, #1ABC9C, #16A085, #1F4E79);
+      background: linear-gradient(135deg, #16A085, #16A085, #3498DB);
       background-size: 200% 200%;
       animation: gradient-rotate 4s ease infinite;
       color: #FFFFFF;
@@ -653,8 +607,8 @@ import { FormsModule } from '@angular/forms';
     .btn-primary:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow:
-        0 8px 28px rgba(26, 188, 156, 0.3),
-        0 4px 12px rgba(31, 78, 121, 0.2);
+        0 8px 28px rgba(22, 160, 133, 0.3),
+        0 4px 12px rgba(52, 152, 219, 0.2);
     }
 
     .btn-primary:active:not(:disabled) {
@@ -667,8 +621,8 @@ import { FormsModule } from '@angular/forms';
     }
 
     .btn-primary.loading {
-      background: rgba(15, 42, 74, 0.6);
-      border: 1.5px solid rgba(26, 188, 156, 0.2);
+      background: rgba(11, 25, 44, 0.6);
+      border: 1.5px solid rgba(22, 160, 133, 0.2);
     }
 
     .btn-content {
@@ -682,7 +636,7 @@ import { FormsModule } from '@angular/forms';
       width: 18px;
       height: 18px;
       border: 2px solid rgba(235, 243, 249, 0.15);
-      border-top-color: #1ABC9C;
+      border-top-color: #16A085;
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
     }
@@ -699,7 +653,7 @@ import { FormsModule } from '@angular/forms';
       padding: 8px 20px;
       border-radius: 9999px;
       border: 1px solid rgba(235, 243, 249, 0.06);
-      background: rgba(15, 42, 74, 0.3);
+      background: rgba(11, 25, 44, 0.3);
       color: rgba(235, 243, 249, 0.4);
       cursor: pointer;
       font-size: 12px;
@@ -713,9 +667,9 @@ import { FormsModule } from '@angular/forms';
     }
 
     .quick-btn:hover {
-      background: rgba(26, 188, 156, 0.1);
-      border-color: rgba(26, 188, 156, 0.25);
-      color: #1ABC9C;
+      background: rgba(22, 160, 133, 0.1);
+      border-color: rgba(22, 160, 133, 0.25);
+      color: #16A085;
       transform: translateY(-1px);
     }
 
@@ -730,7 +684,7 @@ import { FormsModule } from '@angular/forms';
 
     .footer-line {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(26, 188, 156, 0.12), transparent);
+      background: linear-gradient(90deg, transparent, rgba(22, 160, 133, 0.12), transparent);
       margin-bottom: 16px;
     }
 
@@ -747,12 +701,12 @@ import { FormsModule } from '@angular/forms';
 
     .footer-label i {
       font-size: 10px;
-      color: rgba(26, 188, 156, 0.3);
+      color: rgba(22, 160, 133, 0.3);
     }
 
     /* ========== USER CARD (Dashboard) ========== */
     .user-card {
-      background: rgba(15, 42, 74, 0.4);
+      background: rgba(11, 25, 44, 0.4);
       border: 1px solid rgba(235, 243, 249, 0.05);
       border-radius: 16px;
       padding: 8px;
@@ -769,7 +723,7 @@ import { FormsModule } from '@angular/forms';
     }
 
     .user-row:hover {
-      background: rgba(26, 188, 156, 0.04);
+      background: rgba(22, 160, 133, 0.04);
     }
 
     .user-row:not(:last-child) {
@@ -779,7 +733,7 @@ import { FormsModule } from '@angular/forms';
     .user-row-icon {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, rgba(26, 188, 156, 0.12), rgba(31, 78, 121, 0.12));
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.12), rgba(52, 152, 219, 0.12));
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -789,7 +743,7 @@ import { FormsModule } from '@angular/forms';
 
     .user-row-icon i {
       font-size: 13px;
-      color: #1ABC9C;
+      color: #16A085;
     }
 
     .user-row-data {
@@ -809,17 +763,17 @@ import { FormsModule } from '@angular/forms';
 
     .user-row-value {
       font-size: 14px;
-      color: #EBF3F9;
+      color: #ECF0F1;
       font-weight: 500;
     }
 
     .role-badge {
       display: inline-block;
       padding: 2px 10px;
-      background: rgba(26, 188, 156, 0.12);
-      border: 1px solid rgba(26, 188, 156, 0.2);
+      background: rgba(22, 160, 133, 0.12);
+      border: 1px solid rgba(22, 160, 133, 0.2);
       border-radius: 6px;
-      color: #1ABC9C !important;
+      color: #16A085 !important;
       font-size: 12px !important;
       font-weight: 600 !important;
       letter-spacing: 0.5px;
@@ -908,7 +862,7 @@ export class AppComponent {
   tiempoRestante: string = '';
   private countdownTimer: any = null;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router) {
     console.log('APP INICIADA');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -1015,6 +969,7 @@ export class AppComponent {
 
         this.cdr.detectChanges();
         this.programarExpiracion(datos.data.token);
+        this.router.navigate(['/dashboard']);
       } else {
         this.mensaje = datos?.message || 'Error al iniciar sesion';
         this.esError = true;
@@ -1045,5 +1000,6 @@ export class AppComponent {
     this.mensajeSesionExpirada = sesionExpirada;
     this.mensaje = '';
     this.cdr.detectChanges();
+    this.router.navigate(['/']);
   }
 }
