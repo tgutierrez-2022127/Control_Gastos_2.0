@@ -31,8 +31,15 @@ import { Router, RouterModule } from '@angular/router';
         <div class="card-border-glow"></div>
 
         <div class="logo-area">
-          <div class="logo-glow-bg"></div>
-          <img src="assets/logo.png" alt="FinVanguard" class="shield-logo logo-img">
+          <div class="hud-frame">
+            <span class="hud-corner tl"></span>
+            <span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span>
+            <span class="hud-corner br"></span>
+          </div>
+          <div class="reticle-ring"></div>
+          <img src="assets/Logo_Fin.jpg" alt="FinVanguard" class="shield-logo logo-img">
+          <div class="scan-line"></div>
           <div class="orbit-ring ring-1"></div>
           <div class="orbit-ring ring-2"></div>
         </div>
@@ -203,6 +210,45 @@ import { Router, RouterModule } from '@angular/router';
       100% { background-position: 200% 0%; }
     }
 
+    @keyframes hud-scan {
+      0%   { top: -4px; opacity: 0; width: 40%; }
+      8%   { opacity: 1; }
+      50%  { width: 80%; }
+      92%  { opacity: 1; }
+      100% { top: calc(100% + 4px); opacity: 0; width: 40%; }
+    }
+
+    @keyframes hud-glow {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(22,160,133,0.25),
+          0 0 40px rgba(22,160,133,0.1),
+          inset 0 0 20px rgba(22,160,133,0.08);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(22,160,133,0.4),
+          0 0 60px rgba(22,160,133,0.2),
+          0 0 90px rgba(52,152,219,0.08),
+          inset 0 0 30px rgba(22,160,133,0.12);
+      }
+    }
+
+    @keyframes hud-corner-pulse {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 1; }
+    }
+
+    @keyframes rotate-reticle {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes fade-scale-in {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
     /* ========== PAGE ========== */
     .login-page {
       min-height: 100vh;
@@ -322,17 +368,12 @@ import { Router, RouterModule } from '@angular/router';
       align-items: center;
       margin-bottom: 24px;
       position: relative;
-      height: 100px;
+      height: 200px;
+      animation: fade-scale-in 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .logo-glow-bg {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(22, 160, 133, 0.35), rgba(52, 152, 219, 0.35));
-      filter: blur(22px);
-      animation: pulse-ring 4s ease-in-out infinite;
+      display: none;
     }
 
     .success-glow {
@@ -340,35 +381,120 @@ import { Router, RouterModule } from '@angular/router';
     }
 
     .shield-logo {
-      width: 78px;
-      height: 78px;
-      background: linear-gradient(135deg, #16A085, #3498DB, #0B192C);
-      background-size: 200% 200%;
-      animation: gradient-rotate 5s ease infinite;
+      width: 220px;
+      height: 124px;
+      background: rgba(11,25,44,0.6);
       border-radius: 20px;
+      border: 1.5px solid rgba(22,160,133,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      z-index: 2;
-      box-shadow:
-        0 0 24px rgba(22, 160, 133, 0.25),
-        0 0 48px rgba(52, 152, 219, 0.12),
-        0 10px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 5;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: hud-glow 2.5s ease-in-out infinite;
     }
 
     .shield-logo:hover {
-      transform: scale(1.08) rotate(3deg);
+      transform: scale(1.06);
+      border-color: rgba(22,160,133,0.6);
+      box-shadow:
+        0 0 40px rgba(22,160,133,0.4),
+        0 0 80px rgba(22,160,133,0.15),
+        inset 0 0 20px rgba(22,160,133,0.1);
     }
 
     .logo-img {
-      width: 78px;
-      height: 78px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      border-radius: 20px;
+      border-radius: 16px;
       background: transparent !important;
-      mix-blend-mode: screen;
+      position: relative;
+      z-index: 2;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 5%;
+      width: 90%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(22,160,133,0.1) 15%,
+        rgba(22,160,133,0.7) 40%,
+        rgba(52,152,219,0.8) 50%,
+        rgba(22,160,133,0.7) 60%,
+        rgba(22,160,133,0.1) 85%,
+        transparent);
+      box-shadow:
+        0 0 8px rgba(22,160,133,0.5),
+        0 0 20px rgba(22,160,133,0.2);
+      z-index: 10;
+      pointer-events: none;
+      animation: hud-scan 2s ease-in-out infinite;
+    }
+
+    .hud-frame {
+      position: absolute;
+      inset: -12px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hud-corner {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      animation: hud-corner-pulse 3s ease-in-out infinite;
+    }
+
+    .hud-corner::before,
+    .hud-corner::after {
+      content: '';
+      position: absolute;
+      background: rgba(22,160,133,0.6);
+    }
+
+    .hud-corner::before {
+      width: 100%;
+      height: 2px;
+    }
+
+    .hud-corner::after {
+      width: 2px;
+      height: 100%;
+    }
+
+    .hud-corner.tl { top: 0; left: 0; }
+    .hud-corner.tl::before { top: 0; left: 0; }
+    .hud-corner.tl::after { top: 0; left: 0; }
+
+    .hud-corner.tr { top: 0; right: 0; }
+    .hud-corner.tr::before { top: 0; right: 0; }
+    .hud-corner.tr::after { top: 0; right: 0; }
+
+    .hud-corner.bl { bottom: 0; left: 0; }
+    .hud-corner.bl::before { bottom: 0; left: 0; }
+    .hud-corner.bl::after { bottom: 0; left: 0; }
+
+    .hud-corner.br { bottom: 0; right: 0; }
+    .hud-corner.br::before { bottom: 0; right: 0; }
+    .hud-corner.br::after { bottom: 0; right: 0; }
+
+    .hud-corner.tr { animation-delay: 0.5s; }
+    .hud-corner.bl { animation-delay: 1s; }
+    .hud-corner.br { animation-delay: 1.5s; }
+
+    .reticle-ring {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 1px dashed rgba(22,160,133,0.15);
+      border-radius: 50%;
+      animation: rotate-reticle 20s linear infinite;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .success-logo {
@@ -384,22 +510,23 @@ import { Router, RouterModule } from '@angular/router';
 
     .orbit-ring {
       position: absolute;
-      border-radius: 22px;
-      border: 1.5px solid;
-      animation: pulse-ring 5s ease-in-out infinite;
+      border-radius: 50%;
+      border: 1px solid;
       z-index: 1;
+      pointer-events: none;
     }
 
     .ring-1 {
-      width: 94px; height: 94px;
-      border-color: rgba(22, 160, 133, 0.2);
-      animation-delay: 0s;
+      width: 190px; height: 190px;
+      border-color: rgba(22, 160, 133, 0.12);
+      animation: pulse-ring 4s ease-in-out infinite;
     }
 
     .ring-2 {
-      width: 112px; height: 112px;
-      border-color: rgba(52, 152, 219, 0.12);
-      animation-delay: -2.5s;
+      width: 215px; height: 215px;
+      border-color: rgba(52, 152, 219, 0.08);
+      animation: pulse-ring 4s ease-in-out infinite;
+      animation-delay: -2s;
     }
 
     /* ========== TEXT ========== */
