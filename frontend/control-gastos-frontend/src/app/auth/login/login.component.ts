@@ -120,7 +120,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        this.errorMessage = err.error?.message || 'Error al iniciar sesion';
+        this.errorMessage = err.error?.message || 'Error al iniciar sesión';
       }
     });
   }

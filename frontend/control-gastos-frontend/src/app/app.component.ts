@@ -45,7 +45,7 @@ import { Router, RouterModule } from '@angular/router';
         </div>
 
         <h1 class="brand-name">FinVanguard</h1>
-        <p class="brand-tagline">Gestion financiera inteligente</p>
+        <p class="brand-tagline">Gestión financiera inteligente</p>
 
         <div *ngIf="mensajeSesionExpirada" class="alert alert-warning session-alert">
           <div class="alert-icon-wrap">
@@ -53,7 +53,7 @@ import { Router, RouterModule } from '@angular/router';
           </div>
           <div class="alert-body">
             <strong>Sesion expirada</strong>
-            <span>Tu sesion ha caducado. Por favor, inicia sesion nuevamente.</span>
+            <span>Su sesión ha caducado. Por favor, inicia sesión nuevamente.</span>
           </div>
         </div>
 
@@ -82,7 +82,7 @@ import { Router, RouterModule } from '@angular/router';
         <div class="form-group">
           <label class="form-label">
             <i class="fas fa-lock"></i>
-            Contrasena
+            Contraseña
           </label>
           <div class="input-wrapper">
             <input
