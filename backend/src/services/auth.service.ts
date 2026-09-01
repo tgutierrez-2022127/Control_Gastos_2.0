@@ -39,7 +39,7 @@ export class AuthService {
         role: user.role
       },
       process.env.JWT_SECRET || 'default-secret',
-      { expiresIn: 60 }
+      { expiresIn: 120 }
     );
 
     const { password, ...userWithoutPassword } = user as User & { password: string };
