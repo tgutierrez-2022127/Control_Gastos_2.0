@@ -200,8 +200,8 @@ import { Router } from '@angular/router';
                     <!-- Colored arc (yellow) -->
                     <path d="M20,100 A80,80 0 0,1 22,96" fill="none" stroke="#D4FF00" stroke-width="14" stroke-linecap="round"/>
                     <!-- Needle -->
-                    <line x1="100" y1="100" x2="30" y2="95" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="100" cy="100" r="6" fill="#FFFFFF"/>
+                    <line x1="100" y1="100" x2="30" y2="95" stroke="#D4FF00" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="100" cy="100" r="6" fill="#D4FF00"/>
                     <!-- Tick marks -->
                     <circle cx="28" cy="92" r="2.5" fill="#A0AABC"/>
                     <circle cx="52" cy="58" r="2.5" fill="#A0AABC"/>
@@ -496,8 +496,8 @@ import { Router } from '@angular/router';
     .sidebar-icon:hover::before { opacity: 1; }
 
     .sidebar-icon.active {
-      background: rgba(0,230,118,0.1);
-      color: #00E676;
+      background: rgba(212,255,0,0.12);
+      color: #D4FF00;
     }
 
     .sidebar-icon.active::after {
@@ -508,9 +508,9 @@ import { Router } from '@angular/router';
       transform: translateY(-50%);
       width: 3px;
       height: 20px;
-      background: #00E676;
+      background: #D4FF00;
       border-radius: 0 3px 3px 0;
-      box-shadow: 0 0 8px rgba(0,230,118,0.5);
+      box-shadow: 0 0 8px rgba(212,255,0,0.5);
     }
 
     .sidebar-settings {

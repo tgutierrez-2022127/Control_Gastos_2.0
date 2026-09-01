@@ -439,8 +439,8 @@ import { Router } from '@angular/router';
     .sidebar-icon:hover::before { opacity: 1; }
 
     .sidebar-icon.active {
-      background: rgba(0,230,118,0.1);
-      color: #00E676;
+      background: rgba(212,255,0,0.12);
+      color: #D4FF00;
     }
 
     .sidebar-icon.active::after {
@@ -451,9 +451,9 @@ import { Router } from '@angular/router';
       transform: translateY(-50%);
       width: 3px;
       height: 20px;
-      background: #00E676;
+      background: #D4FF00;
       border-radius: 0 3px 3px 0;
-      box-shadow: 0 0 8px rgba(0,230,118,0.5);
+      box-shadow: 0 0 8px rgba(212,255,0,0.5);
     }
 
     .sidebar-settings { margin-top: auto; }
