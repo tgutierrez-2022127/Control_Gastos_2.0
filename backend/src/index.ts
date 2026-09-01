@@ -32,7 +32,7 @@ app.post('/api/auth/login', (req, res) => {
     const token = jwt.sign(
       { id: 1, email: 'admin@kinal.org', role: 'ADMIN' },
       JWT_SECRET,
-      { expiresIn: 60 }
+      { expiresIn: 120 }
     );
     return res.json({
       success: true,
@@ -54,7 +54,7 @@ app.post('/api/auth/login', (req, res) => {
     const token = jwt.sign(
       { id: 2, email: 'usuario@kinal.org', role: 'USER' },
       JWT_SECRET,
-      { expiresIn: 60 }
+      { expiresIn: 120 }
     );
     return res.json({
       success: true,
