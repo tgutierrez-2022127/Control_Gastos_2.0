@@ -17,7 +17,7 @@ import { AuthService } from '../auth.service';
             <img [src]="logoBase64" alt="Logo Control de Gastos" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <h1 style="color: white; font-size: 28px; font-weight: 700; text-shadow: 0 0 20px rgba(0,240,255,0.3);">Control de Gastos</h1>
-          <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 5px;">Controlamos tus gastos</p>
+          <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 5px;">Controlamos sus gastos</p>
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 20px;">
