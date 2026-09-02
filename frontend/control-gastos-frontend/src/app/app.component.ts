@@ -1105,7 +1105,7 @@ export class AppComponent {
     } catch (error) {
       console.error('Error:', error);
       this.cargando = false;
-      this.mensaje = 'Error de conexion con el servidor';
+      this.mensaje = 'Error de conexión con el servidor';
       this.esError = true;
       this.cdr.detectChanges();
     }
