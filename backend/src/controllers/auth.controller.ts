@@ -19,11 +19,11 @@ export const AuthController = {
 
       res.status(200).json({
         success: true,
-        message: 'Inicio de sesion exitoso',
+        message: 'Inicio de sesión exitoso',
         data: result
       });
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Error al iniciar sesion';
+      const message = error instanceof Error ? error.message : 'Error al iniciar sesión';
       res.status(401).json({
         success: false,
         message
